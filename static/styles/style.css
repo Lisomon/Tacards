@@ -1,0 +1,400 @@
+/*------------------------------------------------------ALLGEMEIN------------------------------------------------*/
+
+:root {
+    --maincolor: #00303D;
+    --footerheight: 8rem;
+    --navheight: 4rem;
+    --spielerlisteheight: 3rem;
+    --rechtsseitenspalte: 0.7rem;
+    --teamfarbe-eins: #189dd9;
+    --teamfarbe-zwei: #96c120;
+    --teamfarbe-drei: #e30917;
+    /*alte Mainfarbe: #0B4C5F */
+    /*TAC- hellgrau: #878786*/
+
+}
+
+@media (max-width: 768px) {
+    :root {
+        --footerheight: 7rem;
+        --navheight: 3rem;
+        --spielerlisteheight: 2rem;
+    }
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #E6E6E6;
+    font-size: 1.5rem;
+    height: 100%;
+}
+
+@media (max-width: 992px) {
+    html, body{
+        font-size: 1rem;
+    }
+}
+
+li i{
+    background-color: unset;
+}
+
+.zentrieren{
+    text-align: center;
+    margin-top: 1rem;
+}
+
+body .btn{
+    background-color: var(--maincolor);
+    color: white;
+}
+
+.btn a:hover,body .btn:hover{
+    color: white;
+    text-decoration: none;
+    background-color: var(--teamfarbe-eins);
+}
+
+#freeze{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*------------------------------------------------------NAVBAR------------------------------------------------*/
+.rechtsseiten{
+    font-size: 0.5rem;
+    height: var(--rechtsseitenspalte);
+    margin: 0;
+}
+.rechtsseiten a{
+    text-align: center;
+    padding: 0;
+    color: #878786;
+}
+.rechtsseiten a:hover{
+    text-decoration: none;
+}
+
+nav.row{
+    height: var(--navheight);
+    background-color: var(--maincolor);
+    margin: 0rem;
+    color: white;
+}
+.headericon{
+    text-align: center;
+}
+.headericon svg{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .headericon svg{
+        height: 1.3rem;
+        width: 1.3rem;
+    }
+}
+
+#spieleranzeige{
+    font-size: 1.3rem;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    #spieleranzeige{
+        font-size: 1rem;
+    }
+}
+/*-----------------SETTINGS------------------------------------*/
+.settings .modal-body .btn{
+    background-color: var(--maincolor);
+    color: white;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+ #playerorder{
+    padding: 0;
+}
+
+ #playerorder li{
+    list-style-type: none;
+    border: 1px solid gray;
+    padding: 0rem 1rem 0rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+ #playerorder svg{
+    padding-bottom: 0.3rem;
+    cursor: pointer;
+}
+ #playerorder span:last-child{
+    float: right;
+}
+ #playerorder li:first-child .bi-chevron-up{
+    display: none;
+}
+ #playerorder li:last-child .bi-chevron-down{
+    display: none;
+}
+
+#kartenregeln{
+    list-style-type: none;
+    padding: 0;
+}
+.kartentitel{
+    font-size: 1rem;
+    margin: 0;
+    color: var(--teamfarbe-drei);
+}
+.kartenbeschreibung{
+    font-size: 0.8rem;
+}
+
+/*---------------------------Statistiken----------------------*/
+#statslist{
+    list-style: none;
+    padding: 0;
+    font-size: 1rem;
+}
+.statheadline{
+    font-weight: bold;
+}
+
+/*------------------------------------------------------SPIELERLISTE------------------------------------------------*/
+#spielerliste{
+    list-style-type: none;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: var(--spielerlisteheight);
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+    font-size: 0.7rem;
+}
+#spielerliste li{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#spielerliste .team1{
+    border-bottom: 5px solid var(--teamfarbe-eins);
+}
+
+#spielerliste .team2{
+    border-bottom: 5px solid var(--teamfarbe-zwei);
+}
+
+#spielerliste .team3{
+    border-bottom: 5px solid var(--teamfarbe-drei);
+}
+
+
+#spielerliste li:nth-child(n + 2){
+    border-left: 1px solid gray;
+}
+
+/*------------------------------------------------------MAIN/MESSAGEABEREICH------------------------------------------------*/
+main.row{
+    margin: 0;
+}
+
+main{
+    height: calc(100% - var(--footerheight) - var(--rechtsseitenspalte) - var(--navheight) - var(--spielerlisteheight));
+}
+#kartenstapel{
+    list-style-type: none;
+    margin: 0;
+    height: 100%;
+    padding: 0;
+}
+
+#kartenstapel li{
+    position: absolute;
+}
+
+#kartenstapel img{
+    height: calc(100vh * 0.4);
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 5px 0px 18px #8888;
+}
+
+
+/*Nachrichtenbereich*/
+.modal{
+    z-index: 1100;
+}
+
+
+.infofenster{
+    max-width: 80%;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .infofenster {
+        margin: auto;
+    }
+}
+
+.modal-body #messages{
+    list-style-type: none;
+    /*overflow-y: scroll;---war um das Scrollen zu ermöglichen*/
+    height: calc(100% - var(--footerheight) - var(--navheight));
+    width: 100%;
+}
+/*einzelne Nachrichten*/
+#messages li {
+    width: 80%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 1rem 5rem 1rem 3rem;
+    background: #ffffff;
+    float: left;
+    margin-right: 3%;
+}
+
+@media (max-width: 768px) {
+    #messages li {
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.2rem 0.2rem 0.2rem 0.8rem;
+        margin-right: 0%;
+    }
+}
+
+/*links orientierte Nachrichten*/
+#messages .mymessage {
+    background: var(--maincolor);
+    color: #ffffff;
+    margin-left: 3%;
+    float: right;
+}
+
+#messages li.systemmessage{
+    background: none;
+    border: 1px grey dashed;
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
+}
+
+
+/*-------Desktopansicht------*/
+
+#spieleranzeigedesktop #spielschrittedesktop{
+    list-style: none;
+    font-size: 0.7rem;
+    background-color: lightgrey;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: 1px solid #878786;
+}
+#spieleranzeigedesktop #spielschrittedesktop li:nth-child(-n+6){
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-right: 0.3rem;
+}
+#spieleranzeigedesktop #spielschrittedesktop li:nth-child(n+6){
+    display: none;
+}
+
+/*------------------------------------------------------FOOTER------------------------------------------------*/
+
+/*Aktionsfläche*/
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: var(--footerheight);
+}
+
+/*Handkarten*/
+#cards{
+    width:100%;
+    font-size: 1.3rem;
+    list-style: none;
+    padding-left: 0rem;
+    justify-content: center;
+}
+
+#cards li{
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    cursor: pointer;
+    transition: 1s;
+    z-index: 500;
+}
+
+#cards li:hover{
+    margin-top: -2rem;
+}
+
+#cards li:nth-child(n + 2){
+    margin-left: -4rem;
+}
+
+#cards img{
+    height: 13rem;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 5px 0px 18px #8888
+}
+@media (max-width: 768px) {
+    #cards img{
+        height: 10rem;
+    }
+}
+
+
+.footerbutton{
+    width: 60%;
+}
+
+@media (max-width: 768px) {
+    .footerbutton{
+        width: 80%;
+    }
+}
+
+/*Button um die Anzahl der Teams zu wählen*/
+.zentrieren .teamwahlform{
+    margin-top: 1rem;
+    width: 60%;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .zentrieren .teamwahlform{
+        width: 80%;
+    }
+}
+
+.teamwahlform button{
+    color: #E6E6E6;
+}
+/*---------------------------Impressum----------------------------------*/
+
+.impressum {
+    font-size: 0.7rem;
+}
+.impressum h2,.impressum h3{
+    font-size: 1rem;
+}
+

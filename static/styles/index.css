@@ -1,0 +1,52 @@
+main{
+    height: calc(100% - var(--rechtsseitenspalte) - var(--navheight));
+    margin: 0;
+}
+.anmeldebox{
+    height: 100%;
+}
+.creategame{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
+.creategame .logo{
+    width: 60%;
+    margin-bottom: 3rem;
+}
+.creategame form{
+    margin: 3rem 10%;
+}
+.creategame input{
+    margin-bottom: 1rem;
+}
+.creategame button{
+    width: 100%;
+}
+.copyright{
+    font-size: 0.8rem;
+    color: grey;
+}
+.btn a{
+    color: white;
+}
+.popover-header{
+    font-size: 0.7rem;
+}
+.popover-body {
+    font-size: 0.6rem;
+}
+/*-----------------------------------------------------------404 und Overtimeseite*/
+.falscheSeitetitel{
+font-size: 1rem;
+}
+.falscheSeitetext{
+font-size: 0.8rem;
+}
+.textfeld{
+    border: 1px solid var(--maincolor);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 15px;
+}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TAC Spiel</title>
+    <meta name = "description" content = "Dein Freund möchte gerne TAC mit dir spielen. Folge diesem Link um an dem Spiel teilzunehmen.🃏📱">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <link rel="TAC Icon" type="image/png" href="../assets/favicon.png">
+  </head>
+  <body>
+  <div class="rechtsseiten row">
+      <a href="/datenschutzerklaerung.html" target="_blank" class="col">Datenschutzerklärung</a>
+      <a href="/impressum.html" target="_blank" class="col">Impressum</a>
+  </div>
+  <nav id="navbar" class="row align-items-center" >
+
+          <div class="col-2 headericon">
+              <button type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop">
+                  <svg class="bi bi-info-square" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+                      <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                      <circle cx="8" cy="4.5" r="1"/>
+                  </svg>
+              </button>
+          </div>
+          <div class="row col-8 justify-content-center" id="spieleranzeige">
+              aktueller Spieler
+          </div>
+          <div id="settingbutton" class="col-2 headericon">
+              <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter2">
+                  <svg class="bi bi-gear" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 014.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 01-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 011.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 012.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 012.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 011.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 01-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 018.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 001.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 00.52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 00-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 00-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 00-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 00-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 00.52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 001.255-.52l.094-.319z" clip-rule="evenodd"/>
+                      <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 100 4.492 2.246 2.246 0 000-4.492zM4.754 8a3.246 3.246 0 116.492 0 3.246 3.246 0 01-6.492 0z" clip-rule="evenodd"/>
+                  </svg>
+              </button>
+          </div>
+
+  </nav>
+<header>
+    <div id="freeze" class="d-none"><p>Ein Spieler hat die Verbindung verloren.</p></div>
+    <ul id="spielerliste" class="row flex-nowrap">
+
+    </ul>
+
+</header>
+  <main class="row">
+      <div id="spieleranzeigedesktop" class="col-4 row align-items-center d-none">
+          <ul id="spielschrittedesktop" class="flex">
+
+          </ul>
+      </div>
+    <ul id="kartenstapel" class="row align-items-center col">
+
+    </ul>
+  </main>
+    <footer>
+
+
+
+
+    <!-- Button trigger modal Handkarten -->
+        <div class="zentrieren">
+
+        <div id="ladeanzeige">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+
+            </div>
+            <p>Spiel wird erstellt...</p>
+        </div>
+
+            <div id="showmycards" data-action="play">
+                <ul id="cards" class="row flex-nowrap">
+                </ul>
+            </div>
+        </div>
+    <!-- Modal-->
+
+
+    </footer>
+
+       <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable infofenster" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalCenterTitle">Los geht's!</h5>
+             </div>
+             <div class="modal-body" id="scrolldown">
+
+
+
+                 <ul id="messages">
+
+                 </ul>
+                <div id="linkcontrol">
+                    <p>Teile diesen Link mit deinen Freunden:</p>
+                    <div class="input-group mb-3">
+                        <input type="text" id="einladungslink" class="form-control" placeholder="Einladungslink" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn" type="button" id="newgamesharelink">Link kopieren</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Warte auf alle Spieler & lege die Reihenfolge fest:</p>
+                    <ul id="playerorder">
+
+                    </ul>
+                </div>
+                <div class="input-group d-none teamwahlform" id="teamwahl">
+
+                                <select class="custom-select dropup" id="inputGroupSelectTeams" data-dropup-auto="false">
+
+                                </select>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="confirmnumberofteams" type="button">Bestätigen</button>
+                                </div>
+
+                </div>
+
+
+             </div>
+             <div class="modal-footer">
+               <button id="gamestartfirststep" type="button" class="btn">Weiter</button>
+                 <button type="button" id="closeinfofenster" class="btn btn-secondary d-none" data-dismiss="modal">Schließen</button>
+             </div>
+           </div>
+         </div>
+       </div>
+
+  <div class="modal fade settings" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle2">Einstellungen</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <button type="button" class="btn" id="neuesSpiel">
+                      neues Spiel starten
+                  </button>
+                  <button type="button" class="btn d-none d-lg-block d-xl-block" id="desktopview">
+                      letzte Schritte ein/ausblenden
+                  </button>
+                  <button type="button" class="btn" id="showstats">
+                      Statistik ein/ausblenden
+                  </button>
+                  <div id="statscontainer" class="d-none">
+                      <hr>
+                      <ul id="statslist">
+
+                      </ul>
+                  </div>
+
+                  <hr>
+                  <ul id="kartenregeln" class="">
+                  <li>
+                  <p class="kartentitel">1</p>
+                  <p class="kartenbeschreibung">eine Kugel vom Vorfeld auf das Startfeld legen oder ein Feld im UZS ziehen</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">4</p>
+                  <p class="kartenbeschreibung">vier Felder rückwärts (gegen den UZS) ziehen</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">7</p>
+                  <p class="kartenbeschreibung">sieben mal ein Feld im UZS ziehen (kann auf beliebig viele eigene Spielkugeln verteilt werden), im Vorbeiziehen werfen; im Haus vor und rückwärts ziehen möglich</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">8</p>
+                  <p class="kartenbeschreibung">acht Felder im UZS ziehen oder den nächsten Spieler aussetzen lassen, der dann eine Karte ungenutzt ablegen muss</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">13</p>
+                  <p class="kartenbeschreibung">eine Kugel vom Vorfeld auf das Startfeld legen oder dreizehn Felder im UZS ziehen</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">Trickser</p>
+                  <p class="kartenbeschreibung">zwei Kugeln (egal welche Farbe) auf dem Spielkreis tauschen</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">TAC</p>
+                  <p class="kartenbeschreibung">Zug des vorherigen Spielers rückgängig machen und dessen Karte für sich selbst verwenden</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">Narr</p>
+                  <p class="kartenbeschreibung">Wird der Narr ausgespielt, gibt jeder Spieler seine Karten verdeckt an den Spieler rechts neben sich weiter. Der Spieler, der den Narr ausgespielt hat, muss aus den neu erhaltenen Karten sofort eine beliebige ausspielen.</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">Engel</p>
+                  <p class="kartenbeschreibung">Wer den Engel ausspielt, muss für den im UZS folgenden Spieler sofort eine Spielkugel vom Vorfeld auf das Startfeld setzen (ins Spiel bringen). Wenn beim folgenden Spieler keine Kugel mehr im Vorfeld liegt, so muss für ihn eine belibeige Kugel wahlweise 1 oder 13 Felder im UZS gezogen werden.</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">Krieger</p>
+                  <p class="kartenbeschreibung">Der Spieler, der den Krieger ausspielt, muss mit einer seiner eigenen Kugeln die im UZS nächstliegende Spielkugel werfen.</p>
+                  </li>
+                  <li>
+                  <p class="kartentitel">Teufel</p>
+                  <p class="kartenbeschreibung">Wer die Teufelskarte spielt, darf sich die Karten des im UZS nächsten Spielers anschauen und sofort eine von dessen Karten ausspielen und die Funktion mit dessen Kugeln ausführen.</p>
+                  </li>
+                  </ul>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+       <script src="../js/game.js"></script>
+       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     </body>
+   </html>

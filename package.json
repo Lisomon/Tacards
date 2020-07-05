@@ -1,0 +1,16 @@
+{
+  "name": "tacards",
+  "version": "2.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "devmode": "node app.js",
+    "dev": "npm --env=dev run-script devmode"
+  },
+  "author": "Philipp Greisch, Carl Rehmann",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
